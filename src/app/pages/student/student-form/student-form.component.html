@@ -1,0 +1,108 @@
+<div class="container mt-2 mb-3">
+	<div class="mb-4 pointer" [routerLink]="'/pages/student'">
+		<button class="btn btn-outline-dark btn-sm"><i class="bi bi-caret-left"></i> Back</button>
+		
+	</div>
+	<div class="d-flex justify-content-between align-items-center p-1 bg-light mb-4">
+	 	<h5 class="m-0">{{updateId ? 'Update': 'Add'}} Student Data</h5>
+	</div>
+
+	<div class="studentForm card p-3">
+		<form #studentForm="ngForm">
+			<div class="row mb-3">
+				<div class="col-6">
+					<label class="form-label required" for="firstname">First Name</label>
+					<input type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="studentFormObj.firstname">
+				</div>
+				<div class="col-6">
+					<label class="form-label required" for="lastname">Last Name</label>
+					<input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="studentFormObj.lastname">
+				</div>
+			</div>
+
+			<div class="row mb-3">
+				<div class="col-6">
+					<label class="form-label required" for="firstname">Gender</label>
+					<div>
+					<label class="form-label me-1" for="male">Male</label>
+					<input type="radio" class="form-check-input me-3" id="male" name="gender" value="male" [(ngModel)]="studentFormObj.gender">
+
+					<label class="form-label me-1" for="female">Female</label>
+					<input type="radio" class="form-check-input" id="female" name="gender" value="female" [(ngModel)]="studentFormObj.gender">
+					</div>
+				</div>
+				<div class="col-6">
+					<label class="form-label required" for="class">Class</label>
+					<input type="text" class="form-control" id="class" name="class" [(ngModel)]="studentFormObj.class">
+				</div>
+			</div>
+
+			<div class="row mb-3">
+				<div class="col-6">
+					<label class="form-label required" for="electiveSubject">Elective Subject</label>
+					<select class="form-select" name="electiveSubject" id="electiveSubject" [(ngModel)]="studentFormObj.electiveSubject">
+						<option value="" selected disabled>Select Elective Subject</option>
+						<option *ngFor="let eleSub of gs.electiveSubject" [value]="eleSub">{{eleSub}}</option>
+					</select>
+					
+				</div>
+				<div class="col-6">
+					<div>
+						<label class="form-label required" for="technology">Technology</label>
+					</div>
+					<div class="row">
+						<div class="col-md-4" *ngFor="let tech of gs.technology; let i = index">
+							<input type="checkbox" class="form-check-input me-2" [id]="'technology'+i" [name]="'technology'+i" [value]="tech.name" [checked]="isCheckedValues[tech.name]"
+							(change)="changeTech($event, tech)">
+							<label class="form-label">{{tech.name}}</label>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row mb-3">
+				<div class="col-6">
+					<label class="form-label" for="studentImage">Add Image</label>
+					<input type="file" class="form-control" id="studentImage" name="studentImage" (change)="uploadImage($event)">
+					<img [src]="gs.imageUrl+studentFormObj.image" width="100" class="img-fluid pt-3" *ngIf="studentFormObj.image && !imageSrc">
+					<img [src]="imageSrc" width="100" class="img-fluid pt-3">
+				</div>
+			<!-- 	<div class="col-6">
+					<label class="form-label" for="goalInLife">Goal In Life</label>
+					<div name="studentFormObj.goalInLife" [(ngModel)]="studentFormObj.goalInLife"
+					    [ngxSummernote]="configSummer">
+				  	</div>
+				</div> -->
+			</div>
+
+		<!-- 	<div class="row mb-3">
+				<dropzone [config]="config" [message]="'Click or drag images here to upload'" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone>
+			</div> -->
+
+			
+			<div class="row mb-3">	
+				<label class="form-label mb-2">Multiple Image</label>
+				<ngx-dropzone (change)="onSelect($event)">
+					<ngx-dropzone-label>Drop it here!</ngx-dropzone-label>
+					<ngx-dropzone-preview *ngFor="let f of studentFormObj.multiImage" [removable]="true" (removed)="onRemove(f)">
+						<ngx-dropzone-label >
+							<div class="position-relative img-container">
+								<img [src]="gs.mulImgUrl+f.filename" class="img-fluid multi-image">
+								<div class="img-info">{{ f.filename }} ({{ f.mimetype }})</div>
+							</div>
+						</ngx-dropzone-label>
+					</ngx-dropzone-preview>
+				</ngx-dropzone>
+			</div>
+
+			<div class="mt-1">
+				<button class="btn btn-sm"
+					[ngClass]="updateId ? 'btn-success':'btn-primary'"
+				    (click)="updateId ?  updateStudent(): addStudent()">
+				    {{updateId ? 'Update':'Save'}}
+				</button>
+			</div>
+
+		</form>
+	</div>
+</div>

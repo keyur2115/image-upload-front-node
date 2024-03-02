@@ -1,0 +1,23 @@
+
+.required::after {
+	content:'*';
+	color: red;
+}
+
+.img-info {
+	position:absolute;
+	top: 50%;
+	left:50%;
+	transform: translate(-50%, -50%);
+	opacity:0;
+	z-index: 800;
+}
+
+.img-container:hover, .img-info {
+	opacity: 1;
+	color: black;
+}
+
+.img-container:hover, .multi-image {
+	opacity: .3;
+}

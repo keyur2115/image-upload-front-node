@@ -1,0 +1,27 @@
+<div class="container" >
+	<div class="d-flex justify-content-between align-items-center header" style="height: 5rem;">
+		<ul class="list-unstyled link d-flex align-items-center">
+			<li class="me-4">
+				<img class="img-fluid" src="/assets/logo/education-logo-2.png" alt="Node Academy" style="width: 70px;">
+			</li>
+			<li routerLink="/pages/dashboard" [routerLinkActive]="'active-link'" class="non-active-link">Dashboard</li>
+			<li routerLink="/pages/student" [routerLinkActive]="'active-link'" class="non-active-link">Student</li>
+		</ul>
+
+		<div class="right-part d-flex align-items-center">
+			<div class="circle me-1">K</div>
+			<div class="btn-group">
+				<a type="button" class=" tex-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+				Keyur v
+				</a>
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="#">Action</a></li>
+					<li><a class="dropdown-item" href="#">Another action</a></li>
+					<li><a class="dropdown-item" href="#">Something else here</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="#">Separated link</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
